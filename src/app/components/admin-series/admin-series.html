@@ -1,0 +1,164 @@
+<div class="series-container">
+
+  <h1>Series Management</h1>
+
+  <div class="series-form">
+
+    <h2>
+
+      @if (
+        editingSeriesId === null
+      ) {
+        Add Series
+      }
+      @else {
+        Edit Series
+      }
+
+    </h2>
+
+
+    <select
+      [(ngModel)]="selectedBrandId">
+
+      <option [ngValue]="null">
+        Select Brand
+      </option>
+
+      @for (
+        brand of brands;
+        track brand.brandId
+      ) {
+
+        <option
+          [ngValue]="brand.brandId">
+
+          {{ brand.name }}
+
+        </option>
+
+      }
+
+    </select>
+
+
+    <input
+      type="text"
+      placeholder="Enter series name"
+      [(ngModel)]="seriesName"
+      (keyup.enter)="saveSeries()">
+
+
+    <div class="form-actions">
+
+      <button
+        class="save-btn"
+        (click)="saveSeries()">
+
+        @if (
+          editingSeriesId === null
+        ) {
+          Add Series
+        }
+        @else {
+          Update Series
+        }
+
+      </button>
+
+
+      @if (
+        editingSeriesId !== null
+      ) {
+
+        <button
+          class="cancel-btn"
+          (click)="cancelEdit()">
+
+          Cancel
+
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="series-list">
+
+    <h2>All Series</h2>
+
+
+    @if (
+      seriesList.length === 0
+    ) {
+
+      <p class="empty-message">
+        No series found.
+      </p>
+
+    }
+    @else {
+
+      <div class="series-grid">
+
+        @for (
+          series of seriesList;
+          track series.seriesId
+        ) {
+
+          <div class="series-card">
+
+            <div class="series-info">
+
+              <span class="series-id">
+                #{{ series.seriesId }}
+              </span>
+
+              <h3>
+                {{ series.name }}
+              </h3>
+
+              <p>
+                {{ series.brandName }}
+              </p>
+
+            </div>
+
+
+            <div class="series-actions">
+
+              <button
+                class="edit-btn"
+                (click)="editSeries(series)">
+
+                Edit
+
+              </button>
+
+
+              <button
+                class="delete-btn"
+                (click)="deleteSeries(
+                  series.seriesId
+                )">
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

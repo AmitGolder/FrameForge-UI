@@ -1,0 +1,345 @@
+<h2>FrameForge Products</h2>
+
+<div class="filter-panel">
+
+  <div class="filter-row">
+
+    <!-- Search -->
+
+    <div class="filter-group">
+
+      <label>Search</label>
+
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+        class="search-box">
+
+    </div>
+
+
+    <!-- Brand -->
+
+    <div class="filter-group">
+
+      <label>Brand</label>
+
+      <select
+        [(ngModel)]="selectedBrandId"
+        (change)="onBrandChange()">
+
+        <option [ngValue]="null">
+          All Brands
+        </option>
+
+        @for (brand of brands; track brand.brandId) {
+
+          <option [ngValue]="brand.brandId">
+            {{ brand.name }}
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <!-- Category -->
+
+    <div class="filter-group">
+
+      <label>Category</label>
+
+      <select
+        [(ngModel)]="selectedCategoryId"
+        (change)="applyFilters()">
+
+        <option [ngValue]="null">
+          All Categories
+        </option>
+
+        @for (
+          category of categories;
+          track category.categoryId
+        ) {
+
+          <option
+            [ngValue]="category.categoryId">
+
+            {{ category.name }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <!-- Scale -->
+
+    <div class="filter-group">
+
+      <label>Scale</label>
+
+      <select
+        [(ngModel)]="selectedScaleId"
+        (change)="applyFilters()">
+
+        <option [ngValue]="null">
+          All Scales
+        </option>
+
+        @for (
+          scale of scales;
+          track scale.scaleId
+        ) {
+
+          <option
+            [ngValue]="scale.scaleId">
+
+            {{ scale.name }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <!-- Series -->
+
+    <div class="filter-group">
+
+      <label>Series</label>
+
+      <select
+        [(ngModel)]="selectedSeriesId"
+        (change)="applyFilters()"
+        [disabled]="!selectedBrandId">
+
+        <option [ngValue]="null">
+
+          @if (selectedBrandId) {
+            All Series
+          }
+          @else {
+            Select Brand First
+          }
+
+        </option>
+
+        @for (
+          item of series;
+          track item.seriesId
+        ) {
+
+          <option
+            [ngValue]="item.seriesId">
+
+            {{ item.name }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <!-- Stock -->
+
+    <div class="filter-group stock-filter">
+
+      <label>
+
+        <input
+          type="checkbox"
+          [(ngModel)]="inStockOnly"
+          (change)="applyFilters()">
+
+        In Stock Only
+
+      </label>
+
+    </div>
+
+
+    <!-- Clear -->
+
+    <div class="filter-group">
+
+      <button
+        class="clear-filter-btn"
+        (click)="clearFilters()">
+
+        Clear Filters
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="toolbar">
+
+  <div class="product-count">
+
+    {{ filteredProducts.length }}
+    product(s) found
+
+  </div>
+
+
+  <select
+    [(ngModel)]="sortOption"
+    (change)="onSortChange()"
+    class="sort-dropdown">
+
+    <option value="">
+      Sort By
+    </option>
+
+    <option value="lowToHigh">
+      Price: Low to High
+    </option>
+
+    <option value="highToLow">
+      Price: High to Low
+    </option>
+
+    <option value="aToZ">
+      Name: A to Z
+    </option>
+
+    <option value="zToA">
+      Name: Z to A
+    </option>
+
+  </select>
+
+</div>
+
+
+<div class="product-grid">
+
+  @for (
+    product of filteredProducts;
+    track product.productId
+  ) {
+
+    <div
+      class="product-card"
+      [class.sold-out-card]="!product.isAvailable">
+
+      <div class="image-wrapper">
+
+        @if (
+          product.images &&
+          product.images.length > 0
+        ) {
+
+          <img
+            [src]="getImageUrl(
+              product.images[0]
+            )"
+            [alt]="product.name"
+            class="product-image">
+
+        }
+        @else {
+
+          <div class="no-image">
+            No Image
+          </div>
+
+        }
+
+
+        @if (
+          product.isAvailable &&
+          product.stockQuantity > 0
+        ) {
+
+          <span
+            class="stock-badge available-badge">
+
+            In Stock
+
+          </span>
+
+        }
+        @else {
+
+          <span
+            class="stock-badge sold-badge">
+
+            Out of Stock
+
+          </span>
+
+        }
+
+      </div>
+
+
+      <div class="product-info">
+
+        <h3>
+          {{ product.name }}
+        </h3>
+
+        <p class="price">
+          ₹{{ product.price }}
+        </p>
+
+        <button
+          (click)="viewDetails(
+            product.productId
+          )">
+
+          View Details
+
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
+
+
+@if (filteredProducts.length === 0) {
+
+  <div class="no-products">
+
+    <h3>
+      No products found
+    </h3>
+
+    <p>
+      Try changing or clearing your filters.
+    </p>
+
+    <button
+      (click)="clearFilters()">
+
+      Clear Filters
+
+    </button>
+
+  </div>
+
+}

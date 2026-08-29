@@ -1,0 +1,21 @@
+<div class="login-container">
+  <h2>Admin Login</h2>
+
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" [(ngModel)]="username">
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password">
+  </div>
+
+  @if(errorMessage){
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <button (click)="login()">
+    Login
+  </button>
+</div>

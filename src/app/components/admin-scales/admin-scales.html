@@ -1,0 +1,110 @@
+<div class="scale-container">
+
+  <h1>Scale Management</h1>
+
+  <div class="scale-form">
+
+    <h2>
+      @if (editingScaleId === null) {
+        Add Scale
+      }
+      @else {
+        Edit Scale
+      }
+    </h2>
+
+    <input
+      type="text"
+      placeholder="Example: 1:64"
+      [(ngModel)]="scaleName"
+      (keyup.enter)="saveScale()">
+
+    <div class="form-actions">
+
+      <button
+        class="save-btn"
+        (click)="saveScale()">
+
+        @if (editingScaleId === null) {
+          Add Scale
+        }
+        @else {
+          Update Scale
+        }
+
+      </button>
+
+      @if (editingScaleId !== null) {
+        <button
+          class="cancel-btn"
+          (click)="cancelEdit()">
+          Cancel
+        </button>
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="scales-list">
+
+    <h2>All Scales</h2>
+
+    @if (scales.length === 0) {
+
+      <p class="empty-message">
+        No scales found.
+      </p>
+
+    }
+    @else {
+
+      <div class="scale-grid">
+
+        @for (
+          scale of scales;
+          track scale.scaleId
+        ) {
+
+          <div class="scale-card">
+
+            <div class="scale-info">
+
+              <span class="scale-id">
+                #{{ scale.scaleId }}
+              </span>
+
+              <h3>
+                {{ scale.name }}
+              </h3>
+
+            </div>
+
+            <div class="scale-actions">
+
+              <button
+                class="edit-btn"
+                (click)="editScale(scale)">
+                Edit
+              </button>
+
+              <button
+                class="delete-btn"
+                (click)="deleteScale(scale.scaleId)">
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

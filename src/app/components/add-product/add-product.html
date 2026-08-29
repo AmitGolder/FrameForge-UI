@@ -1,0 +1,196 @@
+<div class="container">
+
+  <h2>Add Product</h2>
+
+  <div class="form-group">
+    <label>Product Name</label>
+
+    <input
+      type="text"
+      [(ngModel)]="product.name">
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+
+    <textarea
+      rows="4"
+      [(ngModel)]="product.description">
+    </textarea>
+  </div>
+
+
+  <!-- BRAND -->
+
+  <div class="form-group">
+
+    <label>Brand</label>
+
+    <select
+      [(ngModel)]="product.brandId"
+      (change)="onBrandChange()">
+
+      <option [ngValue]="null">
+        Select Brand
+      </option>
+
+      @for (brand of brands; track brand.brandId) {
+
+        <option [ngValue]="brand.brandId">
+          {{ brand.name }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+
+  <!-- SERIES -->
+
+  <div class="form-group">
+
+    <label>Series</label>
+
+    <select
+      [(ngModel)]="product.seriesId"
+      [disabled]="!product.brandId">
+
+      <option [ngValue]="null">
+        No Series
+      </option>
+
+      @for (item of series; track item.seriesId) {
+
+        <option [ngValue]="item.seriesId">
+          {{ item.name }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+
+  <!-- SCALE -->
+
+  <div class="form-group">
+
+    <label>Scale</label>
+
+    <select [(ngModel)]="product.scaleId">
+
+      <option [ngValue]="null">
+        No Scale
+      </option>
+
+      @for (scale of scales; track scale.scaleId) {
+
+        <option [ngValue]="scale.scaleId">
+          {{ scale.name }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+
+  <!-- CATEGORY -->
+
+  <div class="form-group">
+
+    <label>Category</label>
+
+    <select [(ngModel)]="product.categoryId">
+
+      <option [ngValue]="null">
+        Select Category
+      </option>
+
+      @for (category of categories; track category.categoryId) {
+
+        <option [ngValue]="category.categoryId">
+          {{ category.name }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+
+  <!-- PRICE -->
+
+  <div class="form-group">
+
+    <label>Price</label>
+
+    <input
+      type="number"
+      [(ngModel)]="product.price">
+
+  </div>
+
+
+  <!-- STOCK -->
+
+  <div class="form-group">
+
+    <label>Stock Quantity</label>
+
+    <input
+      type="number"
+      [(ngModel)]="product.stockQuantity">
+
+  </div>
+
+
+  <!-- AVAILABLE -->
+
+  <div class="form-group">
+
+    <label>
+
+      <input
+        type="checkbox"
+        [(ngModel)]="product.isAvailable">
+
+      Available
+
+    </label>
+
+  </div>
+
+
+  <!-- IMAGES -->
+
+  <div class="form-group">
+
+    <label>Upload Product Images</label>
+
+    <input
+      type="file"
+      multiple
+      (change)="onFilesSelected($event)">
+
+  </div>
+
+
+  <button
+    (click)="saveProduct()"
+    [disabled]="
+      !product.name ||
+      !product.description ||
+      product.price <= 0
+    ">
+
+    Save Product
+
+  </button>
+
+</div>

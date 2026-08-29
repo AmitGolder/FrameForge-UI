@@ -1,0 +1,120 @@
+<div class="brand-container">
+
+  <h1>Brand Management</h1>
+
+  <div class="brand-form">
+
+    <h2>
+      @if (editingBrandId === null) {
+        Add Brand
+      }
+      @else {
+        Edit Brand
+      }
+    </h2>
+
+    <input
+      type="text"
+      placeholder="Enter brand name"
+      [(ngModel)]="brandName"
+      (keyup.enter)="saveBrand()">
+
+    <div class="form-actions">
+
+      <button
+        class="save-btn"
+        (click)="saveBrand()">
+
+        @if (editingBrandId === null) {
+          Add Brand
+        }
+        @else {
+          Update Brand
+        }
+
+      </button>
+
+      @if (editingBrandId !== null) {
+
+        <button
+          class="cancel-btn"
+          (click)="cancelEdit()">
+
+          Cancel
+
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="brands-list">
+
+    <h2>All Brands</h2>
+
+    @if (brands.length === 0) {
+
+      <p class="empty-message">
+        No brands found.
+      </p>
+
+    }
+    @else {
+
+      <div class="brand-grid">
+
+        @for (
+          brand of brands;
+          track brand.brandId
+        ) {
+
+          <div class="brand-card">
+
+            <div class="brand-info">
+
+              <span class="brand-id">
+                #{{ brand.brandId }}
+              </span>
+
+              <h3>
+                {{ brand.name }}
+              </h3>
+
+            </div>
+
+
+            <div class="brand-actions">
+
+              <button
+                class="edit-btn"
+                (click)="editBrand(brand)">
+
+                Edit
+
+              </button>
+
+
+              <button
+                class="delete-btn"
+                (click)="deleteBrand(brand.brandId)">
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

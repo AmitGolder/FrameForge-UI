@@ -1,0 +1,129 @@
+<div class="admin-dashboard">
+
+  <h1>Admin Dashboard</h1>
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+      <h3>Total Products</h3>
+      <p>{{ products.length }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>In Stock</h3>
+      <p>{{ inStockCount }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Out of Stock</h3>
+      <p>{{ outOfStockCount }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Total Orders</h3>
+      <p>{{ totalOrders }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Pending Orders</h3>
+      <p>{{ pendingOrders }}</p>
+    </div>
+
+    <div class="stat-card revenue-card">
+      <h3>Revenue</h3>
+      <p>₹{{ totalRevenue }}</p>
+    </div>
+
+  </div>
+
+  <div class="dashboard-actions">
+
+    <a routerLink="/admin/products/add" class="action-btn">
+      + Add Product
+    </a>
+
+    <a routerLink="/admin/orders" class="action-btn">
+      View Orders
+    </a>
+
+    <a routerLink="/admin/brands" class="action-btn">
+      Manage Brands
+    </a>
+    <a routerLink="/admin/categories" class="action-btn">
+      Manage Categories
+    </a>
+    <a routerLink="/admin/scales" class="action-btn">
+      Manage Scales
+    </a>
+    <a routerLink="/admin/series" class="action-btn">
+      Manage Series
+    </a>
+
+  </div>
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (product of products; track product.productId) {
+
+        <tr>
+          <td>{{ product.productId }}</td>
+          <td>
+            @if(product.images && product.images.length > 0) {
+            <img [src]="getImageUrl(product.images[0])" [alt]="product.name" class="admin-thumbnail">
+            }
+            @else {
+            <div class="no-image">No Image</div>
+            }
+          </td>
+
+          <td>{{ product.name }}</td>
+          <td>₹{{ product.price }}</td>
+          <td>{{ product.stockQuantity }}</td>
+
+          <td>
+            @if(product.isAvailable){
+            <span class="status available">Available</span>
+            }
+            @else{
+            <span class="status unavailable">Out</span>
+            }
+          </td>
+
+          <td class="action-cell">
+
+            <a [routerLink]="['/admin/products/edit', product.productId]" class="edit-btn">
+              Edit
+            </a>
+
+            <button class="delete-btn" (click)="deleteProduct(product.productId)">
+              Delete
+            </button>
+
+          </td>
+        </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

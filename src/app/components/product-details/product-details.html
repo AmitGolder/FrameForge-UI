@@ -1,0 +1,70 @@
+@if(product){
+
+<div class="details-container">
+
+  <div class="product-layout">
+
+    <div class="image-section">
+
+      @if(product.images && product.images.length > 0) {
+      <img [src]="getImageUrl(product.images[currentImageIndex])" [alt]="product.name" class="details-image">
+
+      @if(product.images.length > 1) {
+      <div class="thumbnail-row">
+
+        @for(image of product.images; track image; let i = $index) {
+        <img [src]="getImageUrl(image)" class="thumbnail" [class.active-thumb]="currentImageIndex === i"
+          (click)="currentImageIndex = i">
+        }
+
+      </div>
+      }
+      }
+
+    </div>
+
+    <div class="info-section">
+
+      <h2>{{ product.name }}</h2>
+
+      <p>{{ product.description }}</p>
+
+      <p class="price">
+        ₹{{ product.price }}
+      </p>
+
+      <div class="stock-section">
+
+        @if(product.isAvailable) {
+        <span class="stock-badge in-stock">
+          In Stock ({{ product.stockQuantity }})
+        </span>
+        }
+        @else {
+        <span class="stock-badge sold-out">
+          Out of Stock
+        </span>
+        }
+
+      </div>
+
+      <button (click)="addToCart()" [disabled]="!product.isAvailable">
+        Add To Cart
+      </button>
+
+      <a routerLink="/" class="back-link">
+        ← Back To Products
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+}
+@else {
+
+<p>Loading product...</p>
+
+}

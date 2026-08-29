@@ -1,0 +1,46 @@
+<div class="track-container">
+
+    <h2>Track Order</h2>
+
+    <div class="track-form">
+        <input type="text" placeholder="Order ID (FF2306-0007)" [(ngModel)]="orderId">
+
+        <input type="text" placeholder="Phone Number" [(ngModel)]="phone">
+
+        <button type="button" (click)="trackOrder()">
+            Track Order
+        </button>
+    </div>
+
+    @if(order) {
+
+    <div class="order-result">
+
+        <h3>
+            Order #{{ formatOrderId(order.orderId, order.orderDate) }}
+        </h3>
+
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Total:</strong> ₹{{ order.totalAmount }}</p>
+
+        <div class="items-grid">
+            @for(item of order.items; track item.orderItemId) {
+            <div class="item-card">
+
+                @if(item.image) {
+                <img [src]="getImageUrl(item.image)" class="item-image">
+                }
+
+                <p>{{ item.productName }}</p>
+                <p>Qty: {{ item.quantity }}</p>
+                <p>₹{{ item.price }}</p>
+
+            </div>
+            }
+        </div>
+
+    </div>
+
+    }
+
+</div>

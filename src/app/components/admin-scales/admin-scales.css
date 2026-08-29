@@ -1,0 +1,112 @@
+.scale-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+    color: white;
+}
+
+.scale-container h1 {
+    font-size: 38px;
+    margin-bottom: 30px;
+}
+
+.scale-form,
+.scales-list {
+    background: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.scale-form h2,
+.scales-list h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.scale-form input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #111;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+}
+
+.scale-form input:focus {
+    outline: none;
+    border-color: #E63946;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.save-btn,
+.cancel-btn,
+.edit-btn,
+.delete-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #E63946;
+}
+
+.cancel-btn {
+    background: #555;
+}
+
+.edit-btn {
+    background: #1976d2;
+}
+
+.delete-btn {
+    background: #E63946;
+}
+
+.scale-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.scale-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #252525;
+    border: 1px solid #333;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.scale-info h3 {
+    margin: 6px 0 0;
+}
+
+.scale-id {
+    color: #888;
+    font-size: 13px;
+}
+
+.scale-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.empty-message {
+    color: #888;
+}

@@ -1,0 +1,64 @@
+<h2>Orders Dashboard</h2>
+
+<div class="stats-row">
+    <div class="stat-box">
+        <h4>Total Orders</h4>
+        <p>{{ orders.length }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h4>Pending</h4>
+        <p>{{ orders.filter(o => o.status === 'Pending').length }}</p>
+    </div>
+
+    <div class="stat-box">
+        <h4>Delivered</h4>
+        <p>{{ orders.filter(o => o.status === 'Delivered').length }}</p>
+    </div>
+</div>
+
+<div class="orders-grid">
+
+    <div class="order-card" *ngFor="let order of orders">
+
+        <div class="order-header">
+            <h3>
+                Order #{{ formatOrderId(order.orderId, order.orderDate) }}
+            </h3>
+
+            <span class="status-badge" [class.pending]="order.status === 'Pending'"
+                [class.processing]="order.status === 'Processing'" [class.shipped]="order.status === 'Shipped'"
+                [class.delivered]="order.status === 'Delivered'" [class.cancelled]="order.status === 'Cancelled'">
+
+                {{ order.status }}
+            </span>
+        </div>
+
+        <div class="order-info">
+            <p><strong>Customer:</strong> {{ order.customerName }}</p>
+            <p><strong>Phone:</strong> {{ order.phone }}</p>
+            <p><strong>Total:</strong> ₹{{ order.totalAmount }}</p>
+            <p><strong>Date:</strong> {{ order.orderDate | date:'medium' }}</p>
+        </div>
+
+        <select #statusSelect>
+            @for(status of statuses; track status) {
+            <option [value]="status" [selected]="status === order.status">
+                {{ status }}
+            </option>
+            }
+        </select>
+
+        <div class="action-buttons">
+            <button class="update-btn" (click)="updateStatus(order.orderId, statusSelect.value)">
+                Update Status
+            </button>
+
+            <button class="details-btn" (click)="viewOrder(order.orderId)">
+                View Details
+            </button>
+        </div>
+
+    </div>
+
+</div>

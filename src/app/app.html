@@ -1,0 +1,122 @@
+<div class="app-shell">
+
+  <nav class="navbar">
+
+    <div class="nav-left">
+
+      <button class="hamburger-btn" (click)="toggleMenu()">
+        <span class="material-icons">menu</span>
+      </button>
+
+      <div class="logo" routerLink="/">
+        FrameForge
+      </div>
+
+    </div>
+
+    <div class="nav-right">
+
+      <a routerLink="/" class="nav-item">
+        <span class="material-icons">home</span>
+        Home
+      </a>
+
+      <a routerLink="/cart" class="nav-item cart-link">
+        <span class="material-icons">shopping_cart</span>
+        Cart
+        <span class="cart-badge">
+          {{ cartService.getCartCount() }}
+        </span>
+      </a>
+
+      <ng-container *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/login" class="nav-item">
+          Login
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="authService.isLoggedIn()">
+
+        <div class="profile-wrapper">
+
+          <button class="profile-btn" (click)="toggleProfileMenu(); $event.stopPropagation()">
+            <span class="material-icons">person</span>
+          </button>
+
+          <div class="profile-dropdown" *ngIf="profileMenuOpen">
+
+            <button (click)="goToDashboard()">
+              Dashboard
+            </button>
+
+            <button>
+              My Profile
+            </button>
+
+            <button (click)="logout()">
+              Logout
+            </button>
+
+          </div>
+
+        </div>
+
+      </ng-container>
+
+    </div>
+
+  </nav>
+
+  <div class="sidebar-overlay" *ngIf="menuOpen" (click)="toggleMenu()">
+  </div>
+
+  <div class="sidebar" [class.open]="menuOpen">
+
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+
+      <button (click)="toggleMenu()">✕</button>
+    </div>
+
+    <div class="sidebar-links">
+
+      <a routerLink="/" (click)="toggleMenu()">
+        <span class="material-icons">home</span>
+        Home
+      </a>
+
+      <a routerLink="/cart" (click)="toggleMenu()">
+        <span class="material-icons">shopping_cart</span>
+        Cart
+      </a>
+      <a routerLink="/track-order">Track Order</a>
+
+      <ng-container *ngIf="authService.isLoggedIn()">
+
+        <a routerLink="/admin/products" (click)="toggleMenu()">
+          <span class="material-icons">dashboard</span>
+          Dashboard
+        </a>
+
+        <a routerLink="/admin/orders" (click)="toggleMenu()">
+          <span class="material-icons">receipt_long</span>
+          Orders
+        </a>
+
+      </ng-container>
+
+    </div>
+
+  </div>
+
+  <div class="toast" *ngIf="toastService.show$ | async">
+
+    {{ toastService.message$ | async }}
+
+  </div>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

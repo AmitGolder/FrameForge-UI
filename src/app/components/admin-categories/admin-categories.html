@@ -1,0 +1,117 @@
+<div class="category-container">
+
+  <h1>Category Management</h1>
+
+  <div class="category-form">
+
+    <h2>
+      @if (editingCategoryId === null) {
+        Add Category
+      }
+      @else {
+        Edit Category
+      }
+    </h2>
+
+    <input
+      type="text"
+      placeholder="Enter category name"
+      [(ngModel)]="categoryName"
+      (keyup.enter)="saveCategory()">
+
+    <div class="form-actions">
+
+      <button
+        class="save-btn"
+        (click)="saveCategory()">
+
+        @if (editingCategoryId === null) {
+          Add Category
+        }
+        @else {
+          Update Category
+        }
+
+      </button>
+
+      @if (editingCategoryId !== null) {
+
+        <button
+          class="cancel-btn"
+          (click)="cancelEdit()">
+
+          Cancel
+
+        </button>
+
+      }
+
+    </div>
+
+  </div>
+
+  <div class="categories-list">
+
+    <h2>All Categories</h2>
+
+    @if (categories.length === 0) {
+
+      <p class="empty-message">
+        No categories found.
+      </p>
+
+    }
+    @else {
+
+      <div class="category-grid">
+
+        @for (
+          category of categories;
+          track category.categoryId
+        ) {
+
+          <div class="category-card">
+
+            <div class="category-info">
+
+              <span class="category-id">
+                #{{ category.categoryId }}
+              </span>
+
+              <h3>
+                {{ category.name }}
+              </h3>
+
+            </div>
+
+            <div class="category-actions">
+
+              <button
+                class="edit-btn"
+                (click)="editCategory(category)">
+
+                Edit
+
+              </button>
+
+              <button
+                class="delete-btn"
+                (click)="deleteCategory(category.categoryId)">
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

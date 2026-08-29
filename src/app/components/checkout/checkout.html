@@ -1,0 +1,53 @@
+<div class="checkout-container">
+
+  <h2>Checkout</h2>
+
+  <div class="checkout-layout">
+
+    <div class="shipping-form">
+      <h3>Shipping Details</h3>
+
+      <input
+        type="text"
+        placeholder="Full Name"
+        [(ngModel)]="fullName">
+
+      <textarea
+        placeholder="Address"
+        rows="4"
+        [(ngModel)]="address">
+      </textarea>
+
+      <input
+        type="text"
+        placeholder="Phone Number"
+        [(ngModel)]="phone">
+
+      <button (click)="placeOrder()">
+        Place Order
+      </button>
+    </div>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+
+      <div class="summary-items">
+
+        @for(item of cartService.getCart(); track item.productId) {
+          <div class="summary-item">
+            <span>{{ item.name }} × {{ item.quantity }}</span>
+            <span>₹{{ item.price * item.quantity }}</span>
+          </div>
+        }
+
+      </div>
+
+      <hr>
+
+      <p>Total Items: {{ cartService.getCartCount() }}</p>
+      <p class="total">Total Amount: ₹{{ cartService.getTotal() }}</p>
+    </div>
+
+  </div>
+
+</div>

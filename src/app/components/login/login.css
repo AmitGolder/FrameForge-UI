@@ -1,0 +1,40 @@
+.login-container {
+    width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #1E1E1E;
+    border-radius: 16px;
+    border: 1px solid #333;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #ff3b4d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.error {
+    color: #ff4d5a;
+    margin-bottom: 15px;
+}
