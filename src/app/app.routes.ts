@@ -15,6 +15,10 @@ import { AdminCategoriesComponent } from './components/admin-categories/admin-ca
 import { AdminScalesComponent } from './components/admin-scales/admin-scales';
 import { AdminSeriesComponent } from './components/admin-series/admin-series';
 import { authGuard } from './guards/auth-guard';
+import { ProfileComponent } from './components/profile/profile';
+import { MyOrdersComponent } from './components/my-orders/my-orders';
+import { RegisterComponent } from './components/register/register';
+import { adminGuard } from './guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -32,27 +36,27 @@ export const routes: Routes = [
   {
     path: 'admin/products',
     component: AdminProductsComponent,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/products/add',
     component: AddProductComponent,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/products/edit/:id',
     component: EditProductComponent,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/orders',
     component: OrdersComponent,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/orders/:id',
     component: OrderDetailsComponent,
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'cart',
@@ -68,18 +72,40 @@ export const routes: Routes = [
   },
   {
   path: 'admin/brands',
-  component: AdminBrandsComponent
+  component: AdminBrandsComponent,
+  canActivate: [adminGuard]
   },
   {
   path: 'admin/categories',
-  component: AdminCategoriesComponent
+  component: AdminCategoriesComponent,
+  canActivate: [adminGuard]
   },
   {
   path: 'admin/scales',
-  component: AdminScalesComponent
+  component: AdminScalesComponent,
+  canActivate: [adminGuard]
   },
   {
   path: 'admin/series',
-  component: AdminSeriesComponent
-  }
+  component: AdminSeriesComponent,
+  canActivate: [adminGuard]
+  },
+  {
+  path: 'profile',
+  component: ProfileComponent,
+  canActivate: [authGuard]
+  },
+  {
+  path: 'my-orders',
+  component: MyOrdersComponent,
+  canActivate: [authGuard]
+  },
+  {
+  path: 'login',
+  component: LoginComponent
+  },
+  {
+  path: 'register',
+  component: RegisterComponent
+  },
 ];

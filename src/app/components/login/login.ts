@@ -1,19 +1,28 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
+
 import { ToastService } from '../../services/toast';
 import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink
+  ],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
-  username = '';
+
+  email = '';
   password = '';
   errorMessage = '';
 
@@ -24,23 +33,61 @@ export class LoginComponent {
   ) { }
 
   login(): void {
-    console.log('Login button clicked');
+
     this.errorMessage = '';
 
-    this.authService.login(this.username, this.password)
+    this.authService
+      .login(this.email, this.password)
       .subscribe({
+
         next: (response) => {
-          this.authService.saveToken(response.token);
 
-          alert('Login successful');
-          this.toastService.show('Login successful');
+          this.authService.saveToken(
+            response.token
+          );
+          this.authService.saveRole(
+            response.user.role
+          );
 
-          this.router.navigate(['/admin/products']);
+          this.toastService.show(
+            'Login successful'
+          );
+
+          // Normal users and admins both log in here.
+          // We will redirect based on role.
+          if (response.user.role === 'Admin') {
+
+            this.router.navigate([
+              '/admin/products'
+            ]);
+
+          } else {
+
+            this.router.navigate([
+              '/'
+            ]);
+
+          }
+
         },
-        error: () => {
-          this.errorMessage = 'Invalid username or password';
-          this.toastService.show('Invalid username or password');
+
+        error: (err) => {
+
+          console.error(
+            'Login failed:',
+            err
+          );
+
+          this.errorMessage =
+            err.error?.message ||
+            'Invalid email or password';
+
+          this.toastService.show(
+            this.errorMessage
+          );
+
         }
+
       });
   }
 }

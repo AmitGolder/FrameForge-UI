@@ -1,0 +1,123 @@
+<div class="my-orders-container">
+
+  <div class="page-header">
+    <h2>My Orders</h2>
+    <p>View your order history and current orders.</p>
+  </div>
+
+  @if (isLoading) {
+
+    <div class="loading">
+      Loading your orders...
+    </div>
+
+  }
+  @else if (errorMessage) {
+
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  }
+  @else if (orders.length === 0) {
+
+    <div class="no-orders">
+
+      <h3>No orders yet</h3>
+
+      <p>
+        You haven't placed any orders yet.
+      </p>
+
+    </div>
+
+  }
+  @else {
+
+    <div class="orders-grid">
+
+      @for (order of orders; track order.orderId) {
+
+        <div class="order-card">
+
+          <div class="order-header">
+
+            <div>
+
+              <span class="order-label">
+                Order ID
+              </span>
+
+              <h3>
+                {{
+                  formatOrderId(
+                    order.orderId,
+                    order.orderDate
+                  )
+                }}
+              </h3>
+
+            </div>
+
+            <span
+              class="status"
+              [class.pending]="
+                order.status === 'Pending'
+              "
+              [class.processing]="
+                order.status === 'Processing'
+              "
+              [class.shipped]="
+                order.status === 'Shipped'
+              "
+              [class.delivered]="
+                order.status === 'Delivered'
+              "
+              [class.cancelled]="
+                order.status === 'Cancelled'
+              ">
+
+              {{ order.status }}
+
+            </span>
+
+          </div>
+
+
+          <div class="order-info">
+
+            <div>
+
+              <span>Date</span>
+
+              <strong>
+                {{
+                  order.orderDate
+                    | date:'mediumDate'
+                }}
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>Total</span>
+
+              <strong class="price">
+                ₹{{ order.totalAmount }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

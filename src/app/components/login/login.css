@@ -38,3 +38,23 @@ button {
     color: #ff4d5a;
     margin-bottom: 15px;
 }
+
+.register-link {
+  margin-top: 22px;
+
+  text-align: center;
+
+  color: #999;
+}
+
+.register-link a {
+  margin-left: 5px;
+
+  color: #ff3b4d;
+
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}

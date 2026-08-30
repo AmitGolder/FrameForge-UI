@@ -12,11 +12,22 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   placeOrder(orderData: any): Observable<any> {
-    return this.http.post(this.apiUrl, orderData);
+    return this.http.post(
+      this.apiUrl,
+      orderData
+    );
   }
 
   getOrders(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(
+      this.apiUrl
+    );
+  }
+
+  getMyOrders(): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/my-orders`
+    );
   }
 
   getOrder(id: number): Observable<any> {
@@ -25,14 +36,20 @@ export class OrderService {
     );
   }
 
-  updateOrderStatus(id: number, status: string): Observable<any> {
+  updateOrderStatus(
+    id: number,
+    status: string
+  ): Observable<any> {
     return this.http.put(
       `${this.apiUrl}/${id}/status`,
       { status }
     );
   }
 
-  trackOrder(orderId: number, phone: string): Observable<any> {
+  trackOrder(
+    orderId: number,
+    phone: string
+  ): Observable<any> {
     return this.http.post<any>(
       `${this.apiUrl}/track`,
       { orderId, phone }

@@ -1,0 +1,185 @@
+.my-orders-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 25px;
+}
+
+.page-header {
+  margin-bottom: 35px;
+}
+
+.page-header h2 {
+  margin-bottom: 8px;
+  font-size: 36px;
+  color: white;
+}
+
+.page-header p {
+  color: #aaa;
+}
+
+.loading,
+.error-message,
+.no-orders {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 30px;
+  text-align: center;
+}
+
+.loading {
+  color: #aaa;
+}
+
+.error-message {
+  color: #ff4d5a;
+}
+
+.no-orders h3 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.no-orders p {
+  color: #aaa;
+}
+
+.orders-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.order-card {
+  background: linear-gradient(
+    180deg,
+    #1e1e1e,
+    #181818
+  );
+
+  border: 1px solid #333;
+  border-radius: 16px;
+
+  padding: 22px;
+
+  transition: 0.3s ease;
+}
+
+.order-card:hover {
+  border-color: #e63946;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.3);
+}
+
+.order-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-bottom: 18px;
+
+  border-bottom:
+    1px solid #333;
+}
+
+.order-label {
+  font-size: 12px;
+
+  color: #888;
+
+  text-transform: uppercase;
+}
+
+.order-header h3 {
+  margin-top: 5px;
+
+  color: white;
+
+  font-size: 20px;
+}
+
+.order-info {
+  display: flex;
+
+  gap: 60px;
+
+  padding-top: 18px;
+}
+
+.order-info div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.order-info span {
+  font-size: 13px;
+
+  color: #888;
+}
+
+.order-info strong {
+  color: white;
+}
+
+.price {
+  color: #00c853 !important;
+}
+
+.status {
+  padding: 7px 14px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: bold;
+}
+
+.pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+}
+
+.processing {
+  background: rgba(33, 150, 243, 0.15);
+  color: #2196f3;
+}
+
+.shipped {
+  background: rgba(156, 39, 176, 0.15);
+  color: #ce93d8;
+}
+
+.delivered {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853;
+}
+
+.cancelled {
+  background: rgba(230, 57, 70, 0.15);
+  color: #e63946;
+}
+
+@media (max-width: 600px) {
+
+  .order-header {
+    align-items: flex-start;
+
+    gap: 15px;
+
+    flex-direction: column;
+  }
+
+  .order-info {
+    gap: 30px;
+  }
+}

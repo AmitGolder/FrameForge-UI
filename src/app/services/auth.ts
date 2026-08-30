@@ -11,26 +11,93 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, {
-      username,
-      password
-    });
+
+  register(
+    name: string,
+    email: string,
+    password: string
+  ): Observable<any> {
+
+    return this.http.post(
+      `${this.apiUrl}/register`,
+      {
+        name,
+        email,
+        password
+      }
+    );
   }
+
+
+  login(
+    email: string,
+    password: string
+  ): Observable<any> {
+
+    return this.http.post(
+      `${this.apiUrl}/login`,
+      {
+        email,
+        password
+      }
+    );
+  }
+
 
   saveToken(token: string): void {
-    localStorage.setItem('token', token);
+
+    localStorage.setItem(
+      'token',
+      token
+    );
   }
+
+
+  saveRole(role: string): void {
+
+    localStorage.setItem(
+      'role',
+      role
+    );
+  }
+
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+
+    return localStorage.getItem(
+      'token'
+    );
   }
+
+
+  getRole(): string | null {
+
+    return localStorage.getItem(
+      'role'
+    );
+  }
+
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+
+    return !!this.getToken();
   }
 
+
+  isAdmin(): boolean {
+
+    return this.getRole() === 'Admin';
+  }
+
+
   logout(): void {
-    localStorage.removeItem('token');
+
+    localStorage.removeItem(
+      'token'
+    );
+
+    localStorage.removeItem(
+      'role'
+    );
   }
 }

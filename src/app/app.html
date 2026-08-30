@@ -49,8 +49,16 @@
               Dashboard
             </button>
 
-            <button>
+            <button
+              routerLink="/profile"
+              (click)="profileMenuOpen = false">
               My Profile
+            </button>
+
+            <button
+              routerLink="/my-orders"
+              (click)="profileMenuOpen = false">
+              My Orders
             </button>
 
             <button (click)="logout()">
