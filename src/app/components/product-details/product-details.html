@@ -35,20 +35,24 @@
 
       <div class="stock-section">
 
-        @if(product.isAvailable) {
+        @if(product.stockQuantity > 0) {
+
         <span class="stock-badge in-stock">
           In Stock ({{ product.stockQuantity }})
         </span>
+
         }
         @else {
+
         <span class="stock-badge sold-out">
           Out of Stock
         </span>
+
         }
 
       </div>
 
-      <button (click)="addToCart()" [disabled]="!product.isAvailable">
+      <button (click)="addToCart()" [disabled]="product.stockQuantity <= 0">
         Add To Cart
       </button>
 

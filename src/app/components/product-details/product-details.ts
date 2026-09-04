@@ -48,7 +48,17 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
+
     if (!this.product) {
+      return;
+    }
+
+    if (this.product.stockQuantity <= 0) {
+
+      this.toastService.show(
+        'This product is out of stock'
+      );
+
       return;
     }
 
@@ -60,8 +70,9 @@ export class ProductDetailsComponent implements OnInit {
       image: this.product.images?.[0] || ''
     });
 
-    //alert('Added to cart');
-    this.toastService.show('Added to cart');
+    this.toastService.show(
+      'Added to cart'
+    );
   }
 
   getImageUrl(imageName: string): string {

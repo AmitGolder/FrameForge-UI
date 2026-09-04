@@ -22,9 +22,13 @@ export class TrackOrderComponent {
     private orderService: OrderService,
     private cdr: ChangeDetectorRef,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   trackOrder(): void {
+
+    // Clear previous search result
+    this.order = null;
+
     const numericOrderId = Number(
       this.orderId.split('-').pop()
     );
@@ -32,13 +36,23 @@ export class TrackOrderComponent {
     this.orderService
       .trackOrder(numericOrderId, this.phone)
       .subscribe({
+
         next: (data) => {
           this.order = data;
           this.cdr.detectChanges();
         },
+
         error: () => {
-          this.toastService.show('Order not found');
+
+          this.order = null;
+
+          this.toastService.show(
+            'Order not found'
+          );
+
+          this.cdr.detectChanges();
         }
+
       });
   }
 

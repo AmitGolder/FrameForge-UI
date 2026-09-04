@@ -5,7 +5,7 @@
     padding: 40px;
     border-radius: 18px;
     border: 1px solid #2f2f2f;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 h2 {
@@ -40,7 +40,7 @@ textarea {
 input:focus,
 textarea:focus {
     border-color: #E63946;
-    box-shadow: 0 0 8px rgba(230,57,70,0.25);
+    box-shadow: 0 0 8px rgba(230, 57, 70, 0.25);
 }
 
 textarea {
@@ -79,4 +79,15 @@ button:hover {
 button:disabled {
     background: #555;
     cursor: not-allowed;
+}
+
+.no-spinner::-webkit-inner-spin-button,
+.no-spinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-spinner {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }

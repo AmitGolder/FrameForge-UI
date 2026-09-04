@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  Router,
-  RouterLink
-} from '@angular/router';
-
+import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../../services/toast';
 import { AuthService } from '../../services/auth';
 

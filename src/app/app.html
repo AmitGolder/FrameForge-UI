@@ -45,19 +45,15 @@
 
           <div class="profile-dropdown" *ngIf="profileMenuOpen">
 
-            <button (click)="goToDashboard()">
+            <button *ngIf="authService.isAdmin()" (click)="goToDashboard()">
               Dashboard
             </button>
 
-            <button
-              routerLink="/profile"
-              (click)="profileMenuOpen = false">
+            <button routerLink="/profile" (click)="profileMenuOpen = false">
               My Profile
             </button>
 
-            <button
-              routerLink="/my-orders"
-              (click)="profileMenuOpen = false">
+            <button *ngIf="!authService.isAdmin()" routerLink="/my-orders" (click)="profileMenuOpen = false">
               My Orders
             </button>
 
@@ -97,9 +93,9 @@
         <span class="material-icons">shopping_cart</span>
         Cart
       </a>
-      <a routerLink="/track-order">Track Order</a>
+      <a routerLink="/track-order" (click)="toggleMenu()">Track Order</a>
 
-      <ng-container *ngIf="authService.isLoggedIn()">
+      <ng-container *ngIf="authService.isAdmin()">
 
         <a routerLink="/admin/products" (click)="toggleMenu()">
           <span class="material-icons">dashboard</span>

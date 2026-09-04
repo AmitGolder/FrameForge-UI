@@ -70,18 +70,23 @@ export class RegisterComponent {
       )
       .subscribe({
 
-        next: () => {
+        next: (response) => {
 
           this.isLoading = false;
 
-          this.toastService.show(
-            'Registration successful. Please log in.'
+          // Save the JWT token
+          this.authService.saveToken(
+            response.token
           );
 
-          this.router.navigate([
-            '/login'
-          ]);
+          this.toastService.show(
+            'Registration successful!'
+          );
 
+          // User is now logged in
+          this.router.navigate([
+            '/'
+          ]);
         },
 
         error: (err) => {

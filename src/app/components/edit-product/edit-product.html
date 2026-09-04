@@ -4,18 +4,24 @@
 
   <div class="form-group">
     <label>Name</label>
+
     <input
       type="text"
       [(ngModel)]="product.name">
   </div>
 
+
   <div class="form-group">
+
     <label>Description</label>
+
     <textarea
       rows="4"
       [(ngModel)]="product.description">
     </textarea>
+
   </div>
+
 
   <div class="form-group">
 
@@ -30,14 +36,17 @@
       </option>
 
       @for (brand of brands; track brand.brandId) {
+
         <option [ngValue]="brand.brandId">
           {{ brand.name }}
         </option>
+
       }
 
     </select>
 
   </div>
+
 
   <div class="form-group">
 
@@ -52,14 +61,17 @@
       </option>
 
       @for (item of series; track item.seriesId) {
+
         <option [ngValue]="item.seriesId">
           {{ item.name }}
         </option>
+
       }
 
     </select>
 
   </div>
+
 
   <div class="form-group">
 
@@ -72,14 +84,17 @@
       </option>
 
       @for (scale of scales; track scale.scaleId) {
+
         <option [ngValue]="scale.scaleId">
           {{ scale.name }}
         </option>
+
       }
 
     </select>
 
   </div>
+
 
   <div class="form-group">
 
@@ -92,42 +107,70 @@
       </option>
 
       @for (category of categories; track category.categoryId) {
+
         <option [ngValue]="category.categoryId">
           {{ category.name }}
         </option>
+
       }
 
     </select>
 
   </div>
 
+
+  <!-- PRICE -->
+
   <div class="form-group">
+
     <label>Price</label>
+
     <input
       type="number"
-      [(ngModel)]="product.price">
+      min="1"
+      [(ngModel)]="product.price"
+      class="no-spinner">
+
   </div>
 
+
+  <!-- STOCK -->
+
   <div class="form-group">
+
     <label>Stock Quantity</label>
+
     <input
       type="number"
+      min="0"
       [(ngModel)]="product.stockQuantity">
+
   </div>
+
+
+  <!-- AUTOMATIC STATUS -->
 
   <div class="form-group">
 
-    <label>
+    <label>Status</label>
 
-      <input
-        type="checkbox"
-        [(ngModel)]="product.isAvailable">
+    @if(product.stockQuantity > 0) {
 
-      Available
+      <div class="stock-status available-status">
+        Available
+      </div>
 
-    </label>
+    }
+    @else {
+
+      <div class="stock-status out-status">
+        Out of Stock
+      </div>
+
+    }
 
   </div>
+
 
   <button (click)="updateProduct()">
     Update Product

@@ -97,11 +97,16 @@
           <td>{{ product.stockQuantity }}</td>
 
           <td>
-            @if(product.isAvailable){
-            <span class="status available">Available</span>
+            @if(product.stockQuantity > 0) {
+              <span class="status available">
+                Available
+              </span>
             }
-            @else{
-            <span class="status unavailable">Out</span>
+            
+            @else {
+              <span class="status unavailable">
+                Out
+              </span>
             }
           </td>
 

@@ -46,8 +46,12 @@ export class App {
   }
 
   logout(): void {
-    this.authService.logout();
-    this.profileMenuOpen = false;
-    this.router.navigate(['/']);
+    this.cartService.clearCart();
+
+  this.authService.logout();
+
+  this.profileMenuOpen = false;
+
+  this.router.navigate(['/']);
   }
 }

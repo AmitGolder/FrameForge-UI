@@ -148,17 +148,19 @@ export class EditProductComponent implements OnInit {
   }
 
   updateProduct(): void {
-
-    if (
-      !this.product.name.trim() ||
-      !this.product.description.trim() ||
-      this.product.price <= 0
-    ) {
-      this.toastService.show(
-        'Please fill all required fields'
-      );
+    if (!this.product.name.trim() || !this.product.description.trim() || this.product.price <= 0) {
+      this.toastService.show('Please fill all required fields');
       return;
     }
+
+    if (this.product.stockQuantity < 0) {
+      this.toastService.show('Stock quantity cannot be negative');
+      return;
+    }
+
+    // Keep frontend data consistent too
+    this.product.isAvailable =
+      this.product.stockQuantity > 0;
 
     this.productService
       .updateProduct(
@@ -166,6 +168,7 @@ export class EditProductComponent implements OnInit {
         this.product
       )
       .subscribe({
+
         next: () => {
 
           this.toastService.show(

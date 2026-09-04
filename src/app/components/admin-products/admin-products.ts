@@ -85,11 +85,15 @@ export class AdminProductsComponent implements OnInit {
   }
 
   get inStockCount(): number {
-    return this.products.filter(p => p.isAvailable).length;
+  return this.products.filter(
+    p => p.stockQuantity > 0
+  ).length;
   }
 
-  get outOfStockCount(): number {
-    return this.products.filter(p => !p.isAvailable).length;
+get outOfStockCount(): number {
+  return this.products.filter(
+    p => p.stockQuantity <= 0
+  ).length;
   }
 
   get totalOrders(): number {
